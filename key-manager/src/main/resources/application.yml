@@ -19,6 +19,10 @@ jpa:
     properties:
       hibernate:
         hbm2ddl:
-          auto: update
+          auto: create-drop
         show_sql: true
         format_sql: true
+
+itau:
+  contas:
+    url: ${ITAU_URL:`http://localhost:9091`}

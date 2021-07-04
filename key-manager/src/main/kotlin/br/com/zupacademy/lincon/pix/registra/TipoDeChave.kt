@@ -1,9 +1,9 @@
 package br.com.zupacademy.lincon.pix.registra
 
-import io.micronaut.validation.validator.constraints.EmailValidator
+import org.hibernate.validator.internal.constraintvalidators.hv.EmailValidator
 import org.hibernate.validator.internal.constraintvalidators.hv.br.CPFValidator
 
-enum class `TipoDeChave.kt` {
+enum class TipoDeChave {
 
     CPF {
         override fun valida(chave: String?): Boolean {
@@ -35,6 +35,7 @@ enum class `TipoDeChave.kt` {
                 return false
             }
             return EmailValidator().run {
+                println("Dentro de email: "+ chave)
                 initialize(null)
                 isValid(chave, null)
             }
