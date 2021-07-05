@@ -28,8 +28,6 @@ class ValidPixKeyValidator : ConstraintValidator<ValidPixKey, NovaChavePix> {
         annotationMetadata: AnnotationValue<ValidPixKey>,
         context: ConstraintValidatorContext
     ): Boolean {
-        println("Anotation isVadid: "+value?.chave)
-        println("Anotation isVadid: "+value?.tipo?.valida(value.chave))
         if (value?.tipo == null) {
             return false
         }

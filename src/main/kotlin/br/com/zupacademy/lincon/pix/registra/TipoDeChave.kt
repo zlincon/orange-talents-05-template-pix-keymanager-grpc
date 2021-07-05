@@ -35,7 +35,6 @@ enum class TipoDeChave {
                 return false
             }
             return EmailValidator().run {
-                println("Dentro de email: "+ chave)
                 initialize(null)
                 isValid(chave, null)
             }

@@ -53,6 +53,9 @@ dependencies {
 
     annotationProcessor("io.micronaut.data:micronaut-data-processor")
 
+    testImplementation("org.mockito:mockito-core")
+    testImplementation("org.mockito:mockito-junit-jupiter")
+    testImplementation("com.h2database:h2")
     testImplementation("io.micronaut:micronaut-http-client")
 
 }
