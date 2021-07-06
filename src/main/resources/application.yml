@@ -26,3 +26,7 @@ jpa:
 itau:
   contas:
     url: ${ITAU_URL:`http://localhost:9091`}
+
+bcb:
+  pix:
+    url: ${BCB_URL:`http://localhost:8082`}
