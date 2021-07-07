@@ -22,14 +22,18 @@ class NovaChavePixService(
   private val LOGGER = LoggerFactory.getLogger(this::class.java)
 
   @Transactional
-  fun registra(@Valid novaChave : NovaChavePix): ChavePix {
+  fun registra(@Valid novaChave: NovaChavePix): ChavePix {
 
-    if(repository.existsByChave(novaChave.chave))
+    if (repository.existsByChave(novaChave.chave))
       throw ChavePixExistenteException("Chave Pix '${novaChave.chave}' existente")
 
-    val response = itauClient.buscaContaPorTipo(novaChave.clienteId,
-      novaChave.tipoDeConta!!.name)
-    val conta = response.body()?.toModel() ?: throw IllegalStateException("Cliente não encontrado no itaú")
+    val response = itauClient.buscaContaPorTipo(
+      novaChave.clienteId!!,
+      novaChave.tipoDeConta!!.name
+    )
+    val conta = response.body()?.toModel()
+      ?: throw IllegalStateException("Cliente não encontrado no Itaú")
+
     val chave = novaChave.toModel(conta)
     repository.save(chave)
 
@@ -38,11 +42,13 @@ class NovaChavePixService(
     }
 
     val bcbResponse = bcbClient.create(bcbRequest)
-    if(bcbResponse.status != HttpStatus.CREATED)
-      throw IllegalStateException("Erro ao registrar chave Pix no Banco " +
-          "Central")
+    if (bcbResponse.status != HttpStatus.CREATED)
+      throw IllegalStateException(
+        "Erro ao registrar chave Pix no Banco " +
+            "Central"
+      )
 
-    chave.atualiza(bcbResponse.body().key)
+    chave.atualiza(bcbResponse.body()!!.key)
 
     return chave
 

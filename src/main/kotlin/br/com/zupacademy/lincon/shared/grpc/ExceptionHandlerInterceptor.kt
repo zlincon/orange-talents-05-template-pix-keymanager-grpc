@@ -8,9 +8,6 @@ import org.slf4j.LoggerFactory
 import javax.inject.Inject
 import javax.inject.Singleton
 
-/**
- * Class responsible for intercepting gRPC Endpoints and handling any exception thrown by their methods
- */
 @Singleton
 class ExceptionHandlerInterceptor(@Inject private val resolver: ExceptionHandlerResolver) : MethodInterceptor<BindableService, Any?> {
 
@@ -34,9 +31,6 @@ class ExceptionHandlerInterceptor(@Inject private val resolver: ExceptionHandler
         }
     }
 
-    /**
-     * Represents the endpoint method arguments
-     */
     private class GrpcEndpointArguments(val context : MethodInvocationContext<BindableService, Any?>) {
 
         fun response(): StreamObserver<*> {

@@ -34,7 +34,7 @@ class RemoveChaveService(
     )
       .orElseThrow {
         ChavePixNaoEncontradaException(
-          "Chave Pix não encontrda " +
+          "Chave Pix não encontrada " +
               "ou não pertence ao cliente informado"
         )
       }

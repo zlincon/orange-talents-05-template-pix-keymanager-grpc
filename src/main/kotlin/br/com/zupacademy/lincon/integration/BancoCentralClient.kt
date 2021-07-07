@@ -79,7 +79,7 @@ enum class PixKeyType(val domainType: TipoDeChave?) {
     private val mapping =
       PixKeyType.values().associateBy(PixKeyType::domainType)
 
-    fun by(domainType: br.com.zupacademy.lincon.pix.registra.TipoDeChave): PixKeyType {
+    fun by(domainType: TipoDeChave): PixKeyType {
       return mapping[domainType] ?: throw IllegalStateException(
         "Tipo de " +
             "chave Pix inválido ou não encontrado. $domainType"

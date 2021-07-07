@@ -1,6 +1,7 @@
 package br.com.zupacademy.lincon.pix.registra
 
 import br.com.zupacademy.lincon.pix.TipoDeConta
+import br.com.zupacademy.lincon.shared.validation.ValidPixKey
 import br.com.zupacademy.lincon.shared.validation.ValidUUID
 import io.micronaut.core.annotation.Introspected
 import java.util.*
