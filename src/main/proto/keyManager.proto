@@ -5,6 +5,8 @@ option java_package = "br.com.zupacademy.lincon";
 option java_outer_classname = "KeyManager";
 option objc_class_prefix = "HLW";
 
+import "google/protobuf/timestamp.proto";
+
 package br.com.zupacademy.lincon;
 
 service KeyManagerRegistraService {
@@ -13,6 +15,10 @@ service KeyManagerRegistraService {
 
 service KeymanagerRemoveService {
   rpc remove(RemoveChavePixRequest) returns (RemoveChavePixResponse) {}
+}
+
+service KeymanagerCarregaService {
+  rpc carrega(CarregaChavePixRequest) returns (CarregaChavePixResponse) {}
 }
 
 enum TipoDeChave {
@@ -49,4 +55,38 @@ message RemoveChavePixRequest {
 message RemoveChavePixResponse {
   string clienteId = 1;
   string pixId = 2;
+}
+
+message CarregaChavePixRequest {
+  message FiltroPorPixId {
+    string clienteId = 1;
+    string pixId = 2;
+  }
+
+  oneof filtro {
+    FiltroPorPixId pixId = 1;
+    string chave = 2;
+  }
+}
+
+message CarregaChavePixResponse {
+  message ChavePix {
+    message ContaInfo {
+      TipoDeConta tipo = 1;
+      string instituicao = 2;
+      string nomeDoTitular = 3;
+      string cpfDoTitular = 4;
+      string agencia = 5;
+      string numeroDaConta = 6;
+    }
+
+    TipoDeChave tipo = 1;
+    string chave = 2;
+    ContaInfo conta = 3;
+    google.protobuf.Timestamp criadaEm = 4;
+  }
+
+  string clienteId = 1;
+  string pixId = 2;
+  string chave = 3;
 }
