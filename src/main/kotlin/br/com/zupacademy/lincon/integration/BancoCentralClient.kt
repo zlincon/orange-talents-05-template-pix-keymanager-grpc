@@ -40,6 +40,7 @@ data class CreatePixKeyResponse(
   val bankAccount: BankAccount,
   val owner: Owner,
   val createdAt: LocalDateTime
+
 )
 
 data class CreatePixKeyRequest(

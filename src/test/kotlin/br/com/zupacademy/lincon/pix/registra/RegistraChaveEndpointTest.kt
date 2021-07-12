@@ -63,10 +63,10 @@ internal class RegistraChaveEndpointTest(
     return Mockito.mock(ContasDeClientesNoItauClient::class.java)
   }
 
-//  @MockBean(BancoCentralClient::class)
-//  fun bcbClient(): BancoCentralClient {
-//    return Mockito.mock(BancoCentralClient::class.java)
-//  }
+  @MockBean(BancoCentralClient::class)
+  fun bcbClient(): BancoCentralClient {
+    return Mockito.mock(BancoCentralClient::class.java)
+  }
 
   @Test
   fun `deve registrar uma nova chave pix`() {
@@ -80,8 +80,8 @@ internal class RegistraChaveEndpointTest(
         (dadosDaContaResponse())
     )
 
-//    `when`(bcbClient.create(createPixKeyRequest()))
-//      .thenReturn(HttpResponse.created(createPixKeyResponse()))
+    `when`(bcbClient.create(createPixKeyRequest()))
+      .thenReturn(HttpResponse.created(createPixKeyResponse()))
 
     val response = grpcClient.registra(
       RegistraChavePixRequest.newBuilder()
