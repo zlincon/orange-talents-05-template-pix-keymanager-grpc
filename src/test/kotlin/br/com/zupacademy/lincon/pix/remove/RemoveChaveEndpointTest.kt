@@ -6,10 +6,10 @@ import br.com.zupacademy.lincon.integration.BancoCentralClient
 import br.com.zupacademy.lincon.integration.DeletePixKeyRequest
 import br.com.zupacademy.lincon.integration.DeletePixKeyResponse
 import br.com.zupacademy.lincon.pix.TipoDeConta
-import br.com.zupacademy.lincon.pix.registra.ChavePix
+import br.com.zupacademy.lincon.pix.ChavePix
 import br.com.zupacademy.lincon.pix.registra.ChavePixRepository
-import br.com.zupacademy.lincon.pix.registra.ContaAssociada
-import br.com.zupacademy.lincon.pix.registra.TipoDeChave
+import br.com.zupacademy.lincon.pix.ContaAssociada
+import br.com.zupacademy.lincon.pix.TipoDeChave
 import br.com.zupacademy.lincon.violations
 import io.grpc.ManagedChannel
 import io.grpc.Status
@@ -21,9 +21,7 @@ import io.micronaut.grpc.server.GrpcServerChannel
 import io.micronaut.http.HttpResponse
 import io.micronaut.test.annotation.MockBean
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest
-import org.hamcrest.MatcherAssert
 import org.hamcrest.MatcherAssert.assertThat
-import org.hamcrest.Matchers
 import org.hamcrest.Matchers.containsInAnyOrder
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -206,9 +204,9 @@ class RemoveChaveEndpointTest(
   }
 
   private fun chave(
-    tipo: TipoDeChave,
-    chave: String = UUID.randomUUID().toString(),
-    clienteId: UUID = UUID.randomUUID()
+      tipo: TipoDeChave,
+      chave: String = UUID.randomUUID().toString(),
+      clienteId: UUID = UUID.randomUUID()
   ): ChavePix {
     return ChavePix(
       clienteId = clienteId,

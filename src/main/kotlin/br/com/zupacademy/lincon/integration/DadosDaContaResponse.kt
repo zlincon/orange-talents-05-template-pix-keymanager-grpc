@@ -1,5 +1,7 @@
 package br.com.zupacademy.lincon.pix.registra
 
+import br.com.zupacademy.lincon.pix.ContaAssociada
+
 data class DadosDaContaResponse(
     val tipo: String,
     val instituicao: InstituicaoResponse,

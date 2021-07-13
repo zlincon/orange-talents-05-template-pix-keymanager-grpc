@@ -1,5 +1,8 @@
 package br.com.zupacademy.lincon.pix.registra
 
+import br.com.zupacademy.lincon.pix.ChavePix
+import br.com.zupacademy.lincon.pix.ContaAssociada
+import br.com.zupacademy.lincon.pix.TipoDeChave
 import br.com.zupacademy.lincon.pix.TipoDeConta
 import br.com.zupacademy.lincon.shared.validation.ValidPixKey
 import br.com.zupacademy.lincon.shared.validation.ValidUUID

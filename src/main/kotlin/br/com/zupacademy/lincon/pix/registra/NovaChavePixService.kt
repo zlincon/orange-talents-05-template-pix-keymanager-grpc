@@ -3,6 +3,7 @@ package br.com.zupacademy.lincon.pix.registra
 import br.com.zupacademy.lincon.integration.BancoCentralClient
 import br.com.zupacademy.lincon.integration.ContasDeClientesNoItauClient
 import br.com.zupacademy.lincon.integration.CreatePixKeyRequest
+import br.com.zupacademy.lincon.pix.ChavePix
 import io.micronaut.http.HttpStatus
 import io.micronaut.validation.Validated
 import org.slf4j.LoggerFactory

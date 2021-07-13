@@ -1,4 +1,4 @@
-package br.com.zupacademy.lincon.pix.registra
+package br.com.zupacademy.lincon.pix
 
 import org.hibernate.validator.internal.constraintvalidators.hv.EmailValidator
 import org.hibernate.validator.internal.constraintvalidators.hv.br.CPFValidator

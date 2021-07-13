@@ -1,4 +1,4 @@
-package br.com.zupacademy.lincon.pix.registra
+package br.com.zupacademy.lincon.pix
 
 import javax.persistence.Column
 import javax.persistence.Embeddable

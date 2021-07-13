@@ -88,5 +88,5 @@ message CarregaChavePixResponse {
 
   string clienteId = 1;
   string pixId = 2;
-  string chave = 3;
+  ChavePix chave = 3;
 }

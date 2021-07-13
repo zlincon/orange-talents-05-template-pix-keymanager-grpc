@@ -3,11 +3,11 @@ package br.com.zupacademy.lincon.pix.registra
 import br.com.zupacademy.lincon.*
 import br.com.zupacademy.lincon.TipoDeChave
 import br.com.zupacademy.lincon.integration.*
-import com.google.rpc.BadRequest
+import br.com.zupacademy.lincon.pix.ChavePix
+import br.com.zupacademy.lincon.pix.ContaAssociada
 import io.grpc.ManagedChannel
 import io.grpc.Status
 import io.grpc.StatusRuntimeException
-import io.grpc.protobuf.StatusProto
 import io.micronaut.context.annotation.Bean
 import io.micronaut.context.annotation.Factory
 import io.micronaut.grpc.annotation.GrpcChannel
@@ -102,7 +102,7 @@ internal class RegistraChaveEndpointTest(
   fun `nao deve registrar chave pix quando chave existente`() {
     repository.save(
       chave(
-        tipo = br.com.zupacademy.lincon.pix.registra.TipoDeChave.CPF,
+        tipo = br.com.zupacademy.lincon.pix.TipoDeChave.CPF,
         chave = "63657520325",
         clientId = CLIENTE_ID
       )
@@ -226,9 +226,9 @@ internal class RegistraChaveEndpointTest(
   }
 
   private fun chave(
-    tipo: br.com.zupacademy.lincon.pix.registra.TipoDeChave,
-    chave: String = UUID.randomUUID().toString(),
-    clientId: UUID = UUID.randomUUID()
+      tipo: br.com.zupacademy.lincon.pix.TipoDeChave,
+      chave: String = UUID.randomUUID().toString(),
+      clientId: UUID = UUID.randomUUID()
   ): ChavePix {
     return ChavePix(
       clienteId = clientId,

@@ -1,15 +1,10 @@
 package br.com.zupacademy.lincon.integration
 
-import br.com.zupacademy.lincon.pix.TipoDeConta
-import br.com.zupacademy.lincon.pix.registra.ChavePix
-import br.com.zupacademy.lincon.pix.registra.ContaAssociada
-import br.com.zupacademy.lincon.pix.registra.TipoDeChave
+import br.com.zupacademy.lincon.carrega.ChavePixInfo
+import br.com.zupacademy.lincon.pix.*
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.MediaType
-import io.micronaut.http.annotation.Body
-import io.micronaut.http.annotation.Delete
-import io.micronaut.http.annotation.PathVariable
-import io.micronaut.http.annotation.Post
+import io.micronaut.http.annotation.*
 import io.micronaut.http.client.annotation.Client
 import java.time.LocalDateTime
 
@@ -32,6 +27,35 @@ interface BancoCentralClient {
   fun create(@Body request: CreatePixKeyRequest):
       HttpResponse<CreatePixKeyResponse>
 
+  @Get("/api/v1/pix/keys/{keys}", consumes = [MediaType.APPLICATION_XML])
+  fun findByKey(@PathVariable key: String): HttpResponse<PixKeyDetailsResponse>
+
+}
+
+data class PixKeyDetailsResponse(
+  val keyType: PixKeyType,
+  val key: String,
+  val bankAccount: BankAccount,
+  val owner: Owner,
+  val createdAt: LocalDateTime
+) {
+  fun toModel(): ChavePixInfo {
+    return ChavePixInfo(
+      tipo = keyType.domainType!!,
+      chave = this.key,
+      tipoDeConta = when(this.bankAccount.accountType){
+        BankAccount.AccountType.CACC -> TipoDeConta.CONTA_CORRENTE
+        BankAccount.AccountType.SVGS -> TipoDeConta.CONTA_POUPANCA
+      },
+      conta = ContaAssociada(
+        instituicao = Instituicoes.nome(bankAccount.participant),
+        nomeDoTitular = owner.name,
+        cpfDoTitular = owner.taxIdNumber,
+        agencia = bankAccount.branch,
+        numeroDaConta = bankAccount.accountNumber
+      )
+    )
+  }
 }
 
 data class CreatePixKeyResponse(
