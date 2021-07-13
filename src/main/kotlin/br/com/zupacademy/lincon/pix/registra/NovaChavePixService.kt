@@ -29,7 +29,7 @@ class NovaChavePixService(
       throw ChavePixExistenteException("Chave Pix '${novaChave.chave}' existente")
 
     val response = itauClient.buscaContaPorTipo(
-      novaChave.clienteId!!,
+        novaChave.clienteId,
       novaChave.tipoDeConta!!.name
     )
     val conta = response.body()?.toModel()

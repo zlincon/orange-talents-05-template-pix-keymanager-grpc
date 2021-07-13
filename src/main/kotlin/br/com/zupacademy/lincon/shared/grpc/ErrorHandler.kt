@@ -9,4 +9,4 @@ import kotlin.annotation.AnnotationTarget.*
 @Target(CLASS, FILE, FUNCTION, PROPERTY_GETTER, PROPERTY_SETTER)
 @Around
 @Type(ExceptionHandlerInterceptor::class)
-annotation class ErrorHandler()
+annotation class ErrorHandler

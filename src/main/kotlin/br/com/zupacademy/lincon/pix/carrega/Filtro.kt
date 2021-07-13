@@ -1,4 +1,4 @@
-package br.com.zupacademy.lincon.carrega
+package br.com.zupacademy.lincon.pix.carrega
 
 import br.com.zupacademy.lincon.integration.BancoCentralClient
 import br.com.zupacademy.lincon.pix.ChavePixNaoEncontradaException
@@ -23,8 +23,8 @@ sealed class Filtro {
         @field:NotBlank @field:ValidUUID val clienteId: String,
         @field:NotBlank @field:ValidUUID val pixId: String
     ) : Filtro() {
-        fun pixIdAsUuid() = UUID.fromString(pixId)
-        fun clienteIdAsUuid() = UUID.fromString(clienteId)
+        fun pixIdAsUuid(): UUID = UUID.fromString(pixId)
+        fun clienteIdAsUuid(): UUID = UUID.fromString(clienteId)
 
         override fun filtra(
             repository: ChavePixRepository,
@@ -32,7 +32,7 @@ sealed class Filtro {
         ): ChavePixInfo {
             return repository.findById(pixIdAsUuid())
                 .filter { it.pertenceAo(clienteIdAsUuid()) }
-                .map(ChavePixInfo::of)
+                .map(ChavePixInfo.Companion::of)
                 .orElseThrow { ChavePixNaoEncontradaException("Chave Pix não encontrada") }
         }
     }
@@ -47,7 +47,7 @@ sealed class Filtro {
             bcbClient: BancoCentralClient
         ): ChavePixInfo {
             return repository.findByChave(chave)
-                .map(ChavePixInfo::of)
+                .map(ChavePixInfo.Companion::of)
                 .orElseGet {
                     LOGGER.info("COnsultado chave Pix '$chave' no Banco Central do Brasil (BCB)")
 
@@ -62,7 +62,7 @@ sealed class Filtro {
     }
 
     @Introspected
-    class Invalido() : Filtro() {
+    class Invalido : Filtro() {
         override fun filtra(
             repository: ChavePixRepository,
             bcbClient: BancoCentralClient

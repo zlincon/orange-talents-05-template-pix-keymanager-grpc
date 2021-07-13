@@ -1,4 +1,4 @@
-package br.com.zupacademy.lincon.pix.registra
+package br.com.zupacademy.lincon.integration
 
 import br.com.zupacademy.lincon.pix.ContaAssociada
 

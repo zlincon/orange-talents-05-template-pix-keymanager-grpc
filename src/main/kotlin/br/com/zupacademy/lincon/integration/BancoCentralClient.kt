@@ -1,6 +1,6 @@
 package br.com.zupacademy.lincon.integration
 
-import br.com.zupacademy.lincon.carrega.ChavePixInfo
+import br.com.zupacademy.lincon.pix.carrega.ChavePixInfo
 import br.com.zupacademy.lincon.pix.*
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.MediaType
@@ -27,7 +27,7 @@ interface BancoCentralClient {
   fun create(@Body request: CreatePixKeyRequest):
       HttpResponse<CreatePixKeyResponse>
 
-  @Get("/api/v1/pix/keys/{keys}", consumes = [MediaType.APPLICATION_XML])
+  @Get("/api/v1/pix/keys/{key}", consumes = [MediaType.APPLICATION_XML])
   fun findByKey(@PathVariable key: String): HttpResponse<PixKeyDetailsResponse>
 
 }
@@ -102,7 +102,7 @@ enum class PixKeyType(val domainType: TipoDeChave?) {
 
   companion object {
     private val mapping =
-      PixKeyType.values().associateBy(PixKeyType::domainType)
+      values().associateBy(PixKeyType::domainType)
 
     fun by(domainType: TipoDeChave): PixKeyType {
       return mapping[domainType] ?: throw IllegalStateException(
@@ -119,7 +119,7 @@ data class BankAccount(
   val accountNumber: String,
   val accountType: AccountType
 ) {
-  enum class AccountType() {
+  enum class AccountType {
     CACC, SVGS;
 
     companion object {

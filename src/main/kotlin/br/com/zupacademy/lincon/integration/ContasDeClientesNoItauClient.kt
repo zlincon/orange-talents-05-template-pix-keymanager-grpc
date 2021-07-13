@@ -1,6 +1,5 @@
 package br.com.zupacademy.lincon.integration
 
-import br.com.zupacademy.lincon.pix.registra.DadosDaContaResponse
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.annotation.Get
 import io.micronaut.http.annotation.PathVariable

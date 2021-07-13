@@ -1,4 +1,4 @@
-package br.com.zupacademy.lincon.carrega
+package br.com.zupacademy.lincon.pix.carrega
 
 import br.com.zupacademy.lincon.pix.ChavePix
 import br.com.zupacademy.lincon.pix.ContaAssociada

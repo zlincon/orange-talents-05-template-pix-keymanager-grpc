@@ -1,4 +1,4 @@
-package br.com.zupacademy.lincon.carrega
+package br.com.zupacademy.lincon.pix.carrega
 
 import br.com.zupacademy.lincon.CarregaChavePixResponse
 import br.com.zupacademy.lincon.TipoDeChave
@@ -8,8 +8,8 @@ import java.time.ZoneId
 class CarregaChavePixResponseConverter {
     fun convert(chaveInfo: ChavePixInfo): CarregaChavePixResponse {
         return CarregaChavePixResponse.newBuilder()
-            .setClienteId(chaveInfo.clienteId.toString() ?: "")
-            .setPixId(chaveInfo.pixId.toString() ?: "")
+            .setClienteId(chaveInfo.clienteId.toString())
+            .setPixId(chaveInfo.pixId.toString())
             .setChave(
                 CarregaChavePixResponse.ChavePix.newBuilder()
                     .setTipo(TipoDeChave.valueOf(chaveInfo.tipo.name))

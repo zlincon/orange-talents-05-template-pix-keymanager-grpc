@@ -1,4 +1,4 @@
-package br.com.zupacademy.lincon.carrega
+package br.com.zupacademy.lincon.pix.carrega
 
 import br.com.zupacademy.lincon.CarregaChavePixRequest
 import br.com.zupacademy.lincon.CarregaChavePixRequest.FiltroCase.*
