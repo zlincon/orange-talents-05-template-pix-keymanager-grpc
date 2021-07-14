@@ -53,7 +53,7 @@ sealed class Filtro {
 
                     val response = bcbClient.findByKey(chave)
                     when (response.status) {
-                        HttpStatus.OK -> response.body().toModel()
+                        HttpStatus.OK -> response.body()?.toModel()
                         else -> throw ChavePixNaoEncontradaException("Chave Pix não encontrada")
                     }
                 }
