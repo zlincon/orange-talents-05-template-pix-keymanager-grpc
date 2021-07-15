@@ -195,9 +195,9 @@ class RemoveChaveEndpointTest(
       assertThat(
         violations(), containsInAnyOrder(
           Pair("pixId", "must not be blank"),
-          Pair("pixId", "não é um formato válido de UUID"),
-          Pair("clienteId", "must not be blank"),
-          Pair("clienteId", "não é um formato válido de UUID"),
+          Pair("pixId", "Não é um formato válido de UUID"),
+          Pair("clientId", "must not be blank"),
+          Pair("clientId", "Não é um formato válido de UUID"),
         )
       )
     }
