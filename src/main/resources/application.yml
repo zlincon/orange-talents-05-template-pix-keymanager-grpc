@@ -9,10 +9,10 @@ grpc:
 
 datasources:
   default:
-    url: ${JDBC_URL:`jdbc:postgresql://localhost:5432/micronaut`}
-    username: ${JDBC_USER:dbuser}
-    password: ${JDBC_PASSWORD:""}
-    driverClassName: ${JDBC_DRIVER:org.postgresql.Driver}
+    url: ${DB_URI:`jdbc:postgresql://localhost:5432/micronaut`}
+    username: ${DB_USER:dbuser}
+    password: ${DB_PASSWORD:""}
+    driverClassName: ${DB_DRIVER:org.postgresql.Driver}
 
 jpa:
   default:

@@ -15,3 +15,13 @@ services:
       - POSTGRES_DB=micronaut
     ports:
       - 5432:5432
+  pix-keymanager-grpc:
+    build: .
+    ports:
+      - "50051:50051"
+    environment:
+      - JDBC_URL=jdbc:postgresql://postgres:5432/micronaut
+      - ITAU_URL=http://erp-itau:9091
+      - BCB_URL=http://bcb:8082
+    depends_on:
+      - postgres
