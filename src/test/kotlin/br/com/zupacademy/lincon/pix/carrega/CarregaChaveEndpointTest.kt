@@ -178,8 +178,8 @@ internal class CarregaChaveEndpointTest(
     )
 
     with(response) {
-      assertEquals("", this.pixId)
-      assertEquals("", this.clienteId)
+      assertEquals("null", this.pixId)
+      assertEquals("null", this.clienteId)
       assertEquals(bcbResponse.keyType.name, this.chave.tipo.name)
       assertEquals(bcbResponse.key, this.chave.chave)
     }
