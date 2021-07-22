@@ -35,7 +35,7 @@ import java.util.*
 import javax.inject.Inject
 
 @MicronautTest(transactional = false)
-class RemoveChaveEndpointTest(
+class RemoveKeyEndpointTest(
   val repository: ChavePixRepository,
   val grpcClient: KeymanagerRemoveServiceGrpc.KeymanagerRemoveServiceBlockingStub
 ) {
@@ -79,7 +79,7 @@ class RemoveChaveEndpointTest(
   }
 
   @Test
-  fun `deve remover chave pix existente`() {
+  fun `must remove existing pix key`() {
     `when`(
       bcbClient.delete(
         "rponte@gmail.com", DeletePixKeyRequest
@@ -110,7 +110,7 @@ class RemoveChaveEndpointTest(
   }
 
   @Test
-  fun `nao deve remover chave pix existente quando ocorrer algum erro no serviço do BCB`() {
+  fun `should not remove existing pix key when there is an error in the BCB service`() {
     `when`(
       bcbClient.delete(
         "rponte@gmail.com",
@@ -139,7 +139,7 @@ class RemoveChaveEndpointTest(
   }
 
   @Test
-  fun `nao deve remover chave pix quando chave inexistente`() {
+  fun `should not remove pix key when key does not exist`() {
     val pixIdNaoExistente = UUID.randomUUID().toString()
 
     val thrown = assertThrows<StatusRuntimeException> {
@@ -162,7 +162,7 @@ class RemoveChaveEndpointTest(
   }
 
   @Test
-  fun `nao deve remover chave pix quando chave existente mas pertence a outro cliente`() {
+  fun `should not remove pix key when key exists but belongs to another client`() {
     val outroClienteID = UUID.randomUUID().toString()
 
     val thrown = assertThrows<StatusRuntimeException> {
@@ -184,7 +184,7 @@ class RemoveChaveEndpointTest(
   }
 
   @Test
-  fun `nao deve remover chave pix quando paremetros invalidos`() {
+  fun `should not remove pix key when invalid parameters`() {
     val thrown = assertThrows<StatusRuntimeException> {
       grpcClient.remove(RemoveChavePixRequest.newBuilder().build())
     }

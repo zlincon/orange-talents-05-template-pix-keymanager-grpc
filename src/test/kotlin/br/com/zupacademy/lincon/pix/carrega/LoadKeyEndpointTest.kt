@@ -34,7 +34,7 @@ import java.util.*
 import javax.inject.Inject
 
 @MicronautTest(transactional = false)
-internal class CarregaChaveEndpointTest(
+internal class LoadKeyEndpointTest(
   val repository: ChavePixRepository,
   val grpcClient: KeymanagerCarregaServiceGrpc.KeymanagerCarregaServiceBlockingStub
 ) {
@@ -73,7 +73,7 @@ internal class CarregaChaveEndpointTest(
   }
 
   @Test
-  fun `deve carregar chave por pixId e clienteId`() {
+  fun `must load key by pixId and clientId`() {
     val chaveExistente = repository.findByChave("+551155554321").get()
 
     val response = grpcClient.carrega(
@@ -96,7 +96,7 @@ internal class CarregaChaveEndpointTest(
   }
 
   @Test
-  fun `nao deve carregar chave por pixId e clienteId quando filtro invalido`() {
+  fun `must not load key by pixId and clientId when invalid filter`() {
     val thrown = assertThrows<StatusRuntimeException> {
       grpcClient.carrega(
         CarregaChavePixRequest.newBuilder()
@@ -125,7 +125,7 @@ internal class CarregaChaveEndpointTest(
   }
 
   @Test
-  fun `nao deve carregar chave por pixId e clienteId quando filtro invalido nao existir`() {
+  fun `must not load key by pixId and clientId when invalid filter does not exist`() {
     val pixIdNaoExistente = UUID.randomUUID().toString()
     val clienteIdNaoExistente = UUID.randomUUID().toString()
     val thrown = assertThrows<StatusRuntimeException> {
@@ -148,7 +148,7 @@ internal class CarregaChaveEndpointTest(
   }
 
   @Test
-  fun `nao carregar chave por valor da chave quando registro existir localmente`() {
+  fun `do not load key by key value when record exists locally`() {
     val chaveExistente = repository.findByChave("rafael.ponte@zup.com.br").get()
 
     val response = grpcClient.carrega(
@@ -166,7 +166,7 @@ internal class CarregaChaveEndpointTest(
   }
 
   @Test
-  fun `deve carregar chave por valor da chave quando registro nao existir localmente mas existir no BCB`() {
+  fun `must load key by key value when record does not exist locally but exists in BCB`() {
     val bcbResponse = pixKeyDetailsResponse()
     `when`(bcbClient.findByKey(key = "user.from.another.bank@santander.com.br"))
       .thenReturn(HttpResponse.ok(pixKeyDetailsResponse()))
@@ -186,7 +186,7 @@ internal class CarregaChaveEndpointTest(
   }
 
   @Test
-  fun `nao deve carregar chave por valor da chave quando registro nao existir localmente nem no BCB`() {
+  fun `must not load key by key value when record does not exist locally or in BCB`() {
     `when`(bcbClient.findByKey(key = "not.existing.user@santander.com.br"))
       .thenReturn(HttpResponse.notFound())
 
@@ -205,7 +205,7 @@ internal class CarregaChaveEndpointTest(
   }
 
   @Test
-  fun `nao deve carregar chave por valor da chave quando filtro invalido`() {
+  fun `must not load key by key value when invalid filter`() {
     val thrown = assertThrows<StatusRuntimeException> {
       grpcClient.carrega(
         CarregaChavePixRequest.newBuilder()
@@ -225,7 +225,7 @@ internal class CarregaChaveEndpointTest(
   }
 
   @Test
-  fun `nao deve carregar quando filtro invalido`() {
+  fun `should not load when invalid filter`() {
     val thrown = assertThrows<StatusRuntimeException> {
       grpcClient.carrega(CarregaChavePixRequest.newBuilder().build())
     }

@@ -21,7 +21,7 @@ import org.junit.jupiter.api.*
 import java.util.*
 
 @MicronautTest(transactional = false)
-internal class ListaChavesEndpointTest(
+internal class ListKeysEndpointTest(
   val repository: ChavePixRepository,
   val grpcClient: KeyManagerListaServiceGrpc.KeyManagerListaServiceBlockingStub
 ) {
@@ -51,7 +51,7 @@ internal class ListaChavesEndpointTest(
   }
 
   @Test
-  fun `deve listar todas as chaves do cliente`() {
+  fun `must list all client keys`() {
     val clienteId = CLIENTE_ID.toString()
 
     val response = grpcClient.lista(
@@ -73,7 +73,7 @@ internal class ListaChavesEndpointTest(
   }
 
   @Test
-  fun `nao deve listar as chaves do cliente quando cliente nao possuir chaves`() {
+  fun `should not list client keys when client does not have keys`() {
     val clienteSemChaves = UUID.randomUUID().toString()
 
     val response = grpcClient.lista(
@@ -86,7 +86,7 @@ internal class ListaChavesEndpointTest(
   }
 
   @Test
-  fun `nao deve listar todas as chaves do cliente quando clienteId for invalido`() {
+  fun `should not list all client keys when clientId is invalid`() {
     val clineteIdInvalido = ""
 
     val thrown = assertThrows<StatusRuntimeException> {

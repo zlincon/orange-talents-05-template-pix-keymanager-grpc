@@ -28,7 +28,7 @@ import java.util.*
 import javax.inject.Inject
 
 @MicronautTest(transactional = false)
-internal class RegistraChaveEndpointTest(
+internal class CreateKeyEndpointTest(
   val repository: ChavePixRepository,
   val grpcClient: KeyManagerRegistraServiceGrpc
   .KeyManagerRegistraServiceBlockingStub
@@ -68,7 +68,7 @@ internal class RegistraChaveEndpointTest(
   }
 
   @Test
-  fun `deve registrar uma nova chave pix`() {
+  fun `must register a new pix key`() {
     `when`(
       itauClient.buscaContaPorTipo(
         clienteId = CLIENTE_ID.toString(),
@@ -98,7 +98,7 @@ internal class RegistraChaveEndpointTest(
   }
 
   @Test
-  fun `nao deve registrar chave pix quando chave existente`() {
+  fun `must not register pix key when existing key`() {
     repository.save(
       chave(
         tipo = br.com.zupacademy.lincon.pix.TipoDeChave.CPF,
@@ -125,7 +125,7 @@ internal class RegistraChaveEndpointTest(
   }
 
   @Test
-  fun `nao deve registrar chave pix quando nao encontrar dados da conta cliente`() {
+  fun `should not register pix key when not finding client account data`() {
     `when`(
       itauClient.buscaContaPorTipo(
         clienteId = CLIENTE_ID.toString(),
@@ -152,7 +152,7 @@ internal class RegistraChaveEndpointTest(
   }
 
   @Test
-  fun `nao deve registrar chave pix quando nao for possivel registrar chave no BCB`() {
+  fun `must not register pix key when it is not possible to register key in BCB`() {
     `when`(
       itauClient.buscaContaPorTipo(
         clienteId = CLIENTE_ID.toString(),
@@ -182,7 +182,7 @@ internal class RegistraChaveEndpointTest(
   }
 
   @Test
-  fun `nao deve registrar chave pix quando parametros forem invalidos`() {
+  fun `must not register pix key when parameters are invalid`() {
     val thrown = assertThrows<StatusRuntimeException> {
       grpcClient.registra(RegistraChavePixRequest.newBuilder().build())
     }
@@ -202,7 +202,7 @@ internal class RegistraChaveEndpointTest(
   }
 
   @Test
-  fun `nao deve registrar chave pix quando parametros forem invalidos - chave inválida`() {
+  fun `must not register pix key when parameters are invalid - invalid key`() {
     val thrown = assertThrows<StatusRuntimeException> {
       grpcClient.registra(
         RegistraChavePixRequest.newBuilder()
